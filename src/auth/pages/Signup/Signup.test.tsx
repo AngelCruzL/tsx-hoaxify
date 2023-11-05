@@ -1,6 +1,5 @@
 import { expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
-
+import { fireEvent, render, screen } from '@testing-library/react';
 import { SignupPage } from './Signup.tsx';
 
 describe('Signup', () => {
@@ -64,6 +63,60 @@ describe('Signup', () => {
 
       expect(signupButton).toBeDefined();
       expect(signupButton.getAttribute('type')).toBe('submit');
+    });
+  });
+
+  describe('Interactions', () => {
+    const changeEvent = (content: string) => {
+      return {
+        target: {
+          value: content,
+        },
+      };
+    };
+
+    it('should set the displayName input value into state', async () => {
+      render(<SignupPage />);
+      const displayNameInput: HTMLInputElement =
+        screen.getByPlaceholderText('Your display name');
+      const inputValue = 'my-display-name';
+
+      fireEvent.change(displayNameInput, changeEvent(inputValue));
+
+      expect(displayNameInput.value).toBe(inputValue);
+    });
+
+    it('should set the username input value into state', async () => {
+      render(<SignupPage />);
+      const usernameInput: HTMLInputElement =
+        screen.getByPlaceholderText('Your username');
+      const inputValue = 'some-username';
+
+      fireEvent.change(usernameInput, changeEvent(inputValue));
+
+      expect(usernameInput.value).toBe(inputValue);
+    });
+
+    it('should set the password input value into state', async () => {
+      render(<SignupPage />);
+      const passwordInput: HTMLInputElement =
+        screen.getByPlaceholderText('Your password');
+      const inputValue = 'Secret123';
+
+      fireEvent.change(passwordInput, changeEvent(inputValue));
+
+      expect(passwordInput.value).toBe(inputValue);
+    });
+
+    it('should set the passwordConfirmation input value into state', async () => {
+      render(<SignupPage />);
+      const passwordConfirmationInput: HTMLInputElement =
+        screen.getByPlaceholderText('Confirm your password');
+      const inputValue = 'Secret123';
+
+      fireEvent.change(passwordConfirmationInput, changeEvent(inputValue));
+
+      expect(passwordConfirmationInput.value).toBe(inputValue);
     });
   });
 });
