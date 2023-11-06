@@ -1,7 +1,15 @@
 import { ChangeEvent, FC, ReactElement, useState } from 'react';
 import { SignupForm } from '@auth/types';
 
-export const SignupPage: FC = (): ReactElement => {
+type Actions = {
+  onSubmit: () => void;
+};
+
+type Props = {
+  actions?: Actions;
+};
+
+export const SignupPage: FC<Props> = ({ actions }): ReactElement => {
   const [signUpForm, setSignUpForm] = useState<SignupForm>({
     name: '',
     username: '',
@@ -14,6 +22,10 @@ export const SignupPage: FC = (): ReactElement => {
       ...signUpForm,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const onSubmit = () => {
+    actions?.onSubmit();
   };
 
   return (
@@ -55,7 +67,9 @@ export const SignupPage: FC = (): ReactElement => {
       </div>
 
       <div>
-        <button type="submit">Sign Up</button>
+        <button type="submit" onClick={onSubmit}>
+          Sign Up
+        </button>
       </div>
     </>
   );

@@ -1,4 +1,4 @@
-import { expect } from 'vitest';
+import { expect, vi } from 'vitest';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { SignupPage } from './Signup.tsx';
 
@@ -75,6 +75,10 @@ describe('Signup', () => {
       };
     };
 
+    const actions = {
+      onSubmit: vi.fn(),
+    };
+
     it('should set the displayName input value into state', async () => {
       render(<SignupPage />);
       const displayNameInput: HTMLInputElement =
@@ -117,6 +121,16 @@ describe('Signup', () => {
       fireEvent.change(passwordConfirmationInput, changeEvent(inputValue));
 
       expect(passwordConfirmationInput.value).toBe(inputValue);
+    });
+
+    it('should execute the "onSubmit" action when the submit button is pressed', () => {
+      render(<SignupPage actions={actions} />);
+      const signupButton = screen.getByRole('button', { name: 'Sign Up' });
+
+      fireEvent.click(signupButton);
+
+      expect(actions.onSubmit).toHaveBeenCalled();
+      expect(actions.onSubmit).toHaveBeenCalledOnce();
     });
   });
 });
