@@ -30,47 +30,73 @@ export const SignupPage: FC<Props> = ({ actions }): ReactElement => {
 
   return (
     <>
-      <h1>Sign Up</h1>
+      <h1 className="text-center mt-4 mb-5">Sign Up</h1>
 
-      <div>
-        <input
-          placeholder="Your display name"
-          name="name"
-          onChange={onChange}
-        />
-      </div>
+      <form onSubmit={onSubmit} className="card p-4 mx-auto col-4">
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
+            Display Name
+          </label>
 
-      <div>
-        <input
-          placeholder="Your username"
-          name="username"
-          onChange={onChange}
-        />
-      </div>
+          <input
+            className="form-control"
+            placeholder="Your display name"
+            name="name"
+            id="name"
+            onChange={onChange}
+          />
+        </div>
 
-      <div>
-        <input
-          placeholder="Your password"
-          type="password"
-          name="password"
-          onChange={onChange}
-        />
-      </div>
+        <div className="mb-3">
+          <label htmlFor="username" className="form-label">
+            Username
+          </label>
 
-      <div>
-        <input
-          placeholder="Confirm your password"
-          type="password"
-          name="passwordConfirmation"
-          onChange={onChange}
-        />
-      </div>
+          <input
+            className="form-control"
+            placeholder="Your username"
+            name="username"
+            id="username"
+            onChange={onChange}
+          />
+        </div>
 
-      <div>
-        <button type="submit" onClick={onSubmit}>
-          Sign Up
-        </button>
-      </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+
+          <input
+            className="form-control"
+            placeholder="Your password"
+            type="password"
+            id="password"
+            name="password"
+            onChange={onChange}
+          />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="passwordConfirmation" className="form-label">
+            Password Confirmation
+          </label>
+
+          <input
+            className="form-control"
+            placeholder="Confirm your password"
+            type="password"
+            id="passwordConfirmation"
+            name="passwordConfirmation"
+            onChange={onChange}
+          />
+        </div>
+
+        <div>
+          <button type="submit" className="btn btn-primary">
+            Sign Up
+          </button>
+        </div>
+      </form>
     </>
   );
 };
